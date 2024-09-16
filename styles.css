@@ -13,9 +13,22 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    gap: 150px;
 }
 
 .color {
     background-color: black;
 }
 
+.slider {
+    width: 100%;
+    outline: none;
+    background: gray;
+}
+
+.settings {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
