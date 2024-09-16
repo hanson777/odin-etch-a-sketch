@@ -14,6 +14,7 @@ body {
     align-items: center;
     height: 100vh;
     gap: 150px;
+    background-color: rgb(207, 205, 205);
 }
 
 .color {
@@ -21,9 +22,30 @@ body {
 }
 
 .slider {
+    -webkit-appearance: none;
+    appearance: none;
     width: 100%;
     outline: none;
-    background: gray;
+    border-radius: 25px;
+}
+
+.slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    background: white;
+    border-radius: 25px;
+    height: 15px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: rgb(62, 62, 62);  
+    cursor: pointer;
+    border-radius: 50%;  
+    margin-top: -5px;
 }
 
 .settings {
@@ -31,4 +53,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #333;
 }
