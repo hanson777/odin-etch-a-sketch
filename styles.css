@@ -33,10 +33,6 @@ body {
     background-color: rgba(237,237,237,255);
 }
 
-.color {
-    background-color: rgb(62, 62, 62);
-}
-
 .slider {
     -webkit-appearance: none;
     appearance: none;
@@ -49,7 +45,7 @@ body {
 .slider::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     appearance: none;
-    background: white;
+    background: rgba(237,237,237,255);  
     border-radius: 25px;
     height: 15px;
 }
@@ -59,7 +55,7 @@ body {
     appearance: none;
     width: 25px;
     height: 25px;
-    background: rgb(62, 62, 62);  
+    background: #3e3e3e;  
     cursor: pointer;
     border-radius: 50%;  
     margin-top: -5px;
@@ -74,7 +70,7 @@ body {
 
 p {
     font-size: 20px;
-    color: #333;
+    color: #3e3e3e;
     margin-top: 30px;
 }
 
@@ -83,7 +79,7 @@ p {
     font-size: 20px;
     padding: 10px 24px;
     border-radius: 5px;
-    border: 1px solid #333;
+    border: 1px solid #3e3e3e;
 }
 
 .clear {
@@ -98,14 +94,26 @@ p {
     margin-bottom: 15px;
 }
 
-button:hover {
+.color-picker {
+    margin-bottom: 15px;
+    border: none;
+    width: 100px;
+    height: 100px;
+}
+
+button:hover, .color-picker:hover {
     transform: scale(1.02);
 }
 
 input {
-    border: 1px solid #333;
+    border: 1px solid #3e3e3e;
 }
 
 button {
     background-color: rgba(237,237,237,255);
+}
+
+h1 {
+    color: #3e3e3e;
+    font-size: 100px;
 }

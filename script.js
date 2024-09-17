@@ -7,9 +7,9 @@ const eraseButton = document.querySelector(".eraser");
 const clearButton = document.querySelector(".clear");
 const rainbowButton = document.querySelector(".rainbow");
 const defaultButton = document.querySelector(".default");
+const colorPicker = document.querySelector(".color-picker");
 
-const clickEvent = new Event("click");
-
+let penColor = colorPicker.value;
 let defaultSelected = true;
 let eraserSelected = false;
 let rainbowSelected = false;
@@ -18,7 +18,7 @@ let mousehold = false;
 let boxCount = 16;
 
 createGrid(boxCount);
-
+defaultSelect();
 
 // FUNCTIONS
 
@@ -29,6 +29,10 @@ slider.oninput = function (){
         clearGrid();
         createGrid(boxCount);
     }, "100");
+}
+
+colorPicker.oninput = function (){
+    penColor = this.value;
 }
 
 function createGrid(boxCount){
@@ -49,19 +53,46 @@ function clearGrid(){
     containerDiv.innerHTML = "";
 }
 
-function buttonSelect(buttonSelected, selectedButton, deselectOne, deselectOneButton, deselectTwo, deselectTwoButton){
-    // Select the current button     
-    buttonSelected = true;
-    selectedButton.style.backgroundColor = "#333";
-    selectedButton.style.color = "rgba(237,237,237,255)";
-    // Deselect the other button
-    deselectOne = false;
-    deselectOneButton.style.backgroundColor = "rgba(237,237,237,255)";
-    deselectOneButton.style.color = "#333";
-    // Deselect the other button
-    deselectTwo = false;
-    deselectTwoButton.style.backgroundColor = "rgba(237,237,237,255)";
-    deselectTwoButton.style.color = "#333";
+function eraserSelect(){
+    eraserSelected = true;
+    eraseButton.style.backgroundColor = "#333";
+    eraseButton.style.color = "rgba(237,237,237,255)";
+
+    defaultSelected = false;
+    defaultButton.style.backgroundColor = "rgba(237,237,237,255)";
+    defaultButton.style.color = "#333";
+
+    rainbowSelected = false;
+    rainbowButton.style.backgroundColor = "rgba(237,237,237,255)";
+    rainbowButton.style.color = "#333";
+}
+
+function defaultSelect(){
+    defaultSelected = true;
+    defaultButton.style.backgroundColor = "#333";
+    defaultButton.style.color = "rgba(237,237,237,255)";
+
+    eraserSelected = false;
+    eraseButton.style.backgroundColor = "rgba(237,237,237,255)";
+    eraseButton.style.color = "#333";
+
+    rainbowSelected = false;
+    rainbowButton.style.backgroundColor = "rgba(237,237,237,255)";
+    rainbowButton.style.color = "#333";
+}
+
+function rainbowSelect(){
+    rainbowSelected = true;
+    rainbowButton.style.backgroundColor = "#333";
+    rainbowButton.style.color = "rgba(237,237,237,255)";
+
+    eraserSelected = false;
+    eraseButton.style.backgroundColor = "rgba(237,237,237,255)";
+    eraseButton.style.color = "#333";
+
+    defaultSelected = false;
+    defaultButton.style.backgroundColor = "rgba(237,237,237,255)";
+    defaultButton.style.color = "#333";
 }
 
 // EVENT LISTENERS 
@@ -73,28 +104,26 @@ document.addEventListener("mouseup", () => mousedown = false);
 document.addEventListener("mousemove", (event) => {
     if(mousedown){
         if(event.target.classList.contains("draw") && !eraserSelected){
-            event.target.classList.add("color");
+            event.target.style.backgroundColor = penColor;
         } else if(event.target.classList.contains("draw") && eraserSelected){
-            event.target.classList.remove("color");
+            event.target.style.backgroundColor = "white";
         }
     }
 });
 
 document.addEventListener("click", (event) => {
     if(event.target.classList.contains("eraser")){
-        buttonSelect(eraserSelected, eraseButton, defaultSelected, defaultButton, rainbowSelected, rainbowButton);
+        eraserSelect();
     } else if(event.target.classList.contains("default")){
-        buttonSelect(defaultSelected, defaultButton, eraserSelected, eraseButton, rainbowSelected, rainbowButton);
+        defaultSelect();
     } else if(event.target.classList.contains("rainbow")){
-        buttonSelect(rainbowSelected, rainbowButton, eraserSelected, eraseButton, defaultSelected, defaultButton);
+        rainbowSelect();
     }
 });
 
 clearButton.addEventListener("click", () => { 
-    nodeList = document.querySelectorAll("div");
-    canvasGrids = Array.from(nodeList);
-    canvasGrids = canvasGrids.filter((element) => element.classList.contains("draw"))
-    canvasGrids.forEach((element) => element.classList.remove("color"))
+    clearGrid();
+    createGrid(boxCount);
 });
 
 
