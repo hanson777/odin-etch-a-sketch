@@ -30,7 +30,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: rgb(207, 205, 205);
+    background-color: rgba(237,237,237,255);
 }
 
 .color {
@@ -78,10 +78,22 @@ p {
     margin-top: 30px;
 }
 
-.eraser {
+.eraser, .clear {
     width: 100%;
     font-size: 20px;
     padding: 10px 24px;
     border-radius: 5px;
+    border: 1px solid #333;
+}
+
+.clear {
+    margin-bottom: 15px;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+input {
     border: 1px solid #333;
 }

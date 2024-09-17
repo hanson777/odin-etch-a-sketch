@@ -1,11 +1,17 @@
+// VARIABLES 
+
 const containerDiv = document.querySelector(".container");
 const sliderDisplay = document.querySelector(".sliderdisplay");
 const slider = document.querySelector(".slider");
 const eraseButton = document.querySelector(".eraser");
+const clearButton = document.querySelector(".clear");
+
 let boxCount = 16;
 let erase = false;
+
 createGrid(boxCount);
 
+// FUNCTIONS
 
 slider.oninput = function (){
     sliderDisplay.textContent = `${this.value} x ${this.value}`;
@@ -15,7 +21,6 @@ slider.oninput = function (){
         createGrid(boxCount);
     }, "100");
 }
-
 
 function createGrid(boxCount){
     dFrag = document.createDocumentFragment();
@@ -35,8 +40,9 @@ function clearGrid(){
     containerDiv.innerHTML = "";
 }
 
+// EVENT LISTENERS 
 
-document.addEventListener("mouseover", event => { 
+document.addEventListener("mousedown", (event) => { 
     if(event.target.classList.contains("draw") && !erase){
         event.target.classList.add("color");
     } else if(event.target.classList.contains("draw") && erase){
@@ -50,11 +56,16 @@ eraseButton.addEventListener("click", () => {
         eraseButton.style.backgroundColor = "#333";
         eraseButton.style.color = "white";
     } else {
-        eraseButton.style.backgroundColor = "white";
+        eraseButton.style.backgroundColor = "rgba(237,237,237,255)";
         eraseButton.style.color = "#333";
     }
 });
 
-
+clearButton.addEventListener("click", () => { 
+    nodeList = document.querySelectorAll("div");
+    canvasGrids = Array.from(nodeList);
+    canvasGrids = canvasGrids.filter((element) => element.classList.contains("draw"))
+    canvasGrids.forEach((element) => element.classList.remove("color"))
+});
 
 
