@@ -75,3 +75,13 @@ p {
     font-size: 20px;
     color: #333;
 }
+
+.eraser {
+    width: 100%;
+    border-radius: 25px;
+
+}
+
+.erase {
+    color: #333;
+}

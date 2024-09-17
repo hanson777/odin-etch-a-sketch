@@ -1,7 +1,9 @@
 const containerDiv = document.querySelector(".container");
 const sliderDisplay = document.querySelector(".sliderdisplay");
 const slider = document.querySelector(".slider");
+const eraseButton = document.querySelector(".eraser");
 let boxCount = 16;
+let erase = false;
 createGrid(boxCount);
 
 
@@ -35,9 +37,16 @@ function clearGrid(){
 
 
 document.addEventListener("mouseover", event => { 
-    if(event.target.classList.contains("draw")){
+    if(event.target.classList.contains("draw") && !erase){
         event.target.classList.add("color");
+    } else if(event.target.classList.contains("draw") && erase){
+        event.target.classList.remove("color");
+        event.target.classList.add("erase");
     }
+});
+
+eraseButton.addEventListener("click", () => {
+    erase = !erase;
 });
 
 
