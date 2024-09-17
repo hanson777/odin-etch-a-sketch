@@ -41,12 +41,18 @@ document.addEventListener("mouseover", event => {
         event.target.classList.add("color");
     } else if(event.target.classList.contains("draw") && erase){
         event.target.classList.remove("color");
-        event.target.classList.add("erase");
     }
 });
 
 eraseButton.addEventListener("click", () => {
     erase = !erase;
+    if(erase){
+        eraseButton.style.backgroundColor = "#333";
+        eraseButton.style.color = "white";
+    } else {
+        eraseButton.style.backgroundColor = "white";
+        eraseButton.style.color = "#333";
+    }
 });
 
 
