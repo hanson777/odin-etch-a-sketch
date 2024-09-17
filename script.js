@@ -8,6 +8,8 @@ const clearButton = document.querySelector(".clear");
 
 let boxCount = 16;
 let erase = false;
+let mousedown = false;
+let mousehold = false;
 
 createGrid(boxCount);
 
@@ -42,11 +44,17 @@ function clearGrid(){
 
 // EVENT LISTENERS 
 
-document.addEventListener("mousedown", (event) => { 
-    if(event.target.classList.contains("draw") && !erase){
-        event.target.classList.add("color");
-    } else if(event.target.classList.contains("draw") && erase){
-        event.target.classList.remove("color");
+document.addEventListener("mousedown", () => mousedown = true);
+
+document.addEventListener("mouseup", () => mousedown = false);
+
+document.addEventListener("mousemove", (event) => {
+    if(mousedown){
+        if(event.target.classList.contains("draw") && !erase){
+            event.target.classList.add("color");
+        } else if(event.target.classList.contains("draw") && erase){
+            event.target.classList.remove("color");
+        }
     }
 });
 
