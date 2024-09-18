@@ -8,6 +8,7 @@ const clearButton = document.querySelector(".clear");
 const rainbowButton = document.querySelector(".rainbow");
 const defaultButton = document.querySelector(".default");
 const colorPicker = document.querySelector(".color-picker");
+const rainbowColors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
 let penColor = colorPicker.value;
 let defaultSelected = true;
@@ -103,10 +104,12 @@ document.addEventListener("mouseup", () => mousedown = false);
 
 document.addEventListener("mousemove", (event) => {
     if(mousedown){
-        if(event.target.classList.contains("draw") && !eraserSelected){
+        if(event.target.classList.contains("draw") && !eraserSelected && defaultSelected){
             event.target.style.backgroundColor = penColor;
         } else if(event.target.classList.contains("draw") && eraserSelected){
             event.target.style.backgroundColor = "white";
+        } else if(event.target.classList.contains("draw") && rainbowSelected){
+            event.target.style.backgroundColor = rainbowColors[Math.floor(Math.random() * 7) + 1]
         }
     }
 });
