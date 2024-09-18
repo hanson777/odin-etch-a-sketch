@@ -109,7 +109,7 @@ document.addEventListener("mousemove", (event) => {
         } else if(event.target.classList.contains("draw") && eraserSelected){
             event.target.style.backgroundColor = "white";
         } else if(event.target.classList.contains("draw") && rainbowSelected){
-            event.target.style.backgroundColor = rainbowColors[Math.floor(Math.random() * 7) + 1]
+            event.target.style.backgroundColor = rainbowColors[Math.floor(Math.random() * 7)]
         }
     }
 });
