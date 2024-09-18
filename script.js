@@ -98,7 +98,16 @@ function rainbowSelect(){
 
 // EVENT LISTENERS 
 
-document.addEventListener("mousedown", () => mousedown = true);
+document.addEventListener("mousedown", (event) =>  {
+    mousedown = true;
+    if(event.target.classList.contains("draw") && !eraserSelected && defaultSelected){
+        event.target.style.backgroundColor = penColor;
+    } else if(event.target.classList.contains("draw") && eraserSelected){
+        event.target.style.backgroundColor = "white";
+    } else if(event.target.classList.contains("draw") && rainbowSelected){
+        event.target.style.backgroundColor = rainbowColors[Math.floor(Math.random() * 7)]
+    }
+});
 
 document.addEventListener("mouseup", () => mousedown = false);
 
