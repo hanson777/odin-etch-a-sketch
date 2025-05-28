@@ -15,7 +15,6 @@ let defaultSelected = true;
 let eraserSelected = false;
 let rainbowSelected = false;
 let mousedown = false;
-let mousehold = false;
 let boxCount = 16;
 
 createGrid(boxCount);
@@ -44,6 +43,8 @@ function createGrid(boxCount){
             box.style.width = (containerDiv.clientWidth / boxCount) + 'px';
             box.style.height = (containerDiv.clientHeight / boxCount) + 'px';
             box.className = "draw";
+            box.addEventListener("mouseover", changeColor);
+            box.addEventListener("mousedown", changeColor);
             dFrag.appendChild(box);
         }
     }
@@ -101,27 +102,34 @@ function rainbowSelect(){
 document.addEventListener("mousedown", (event) =>  {
     mousedown = true;
     if(event.target.classList.contains("draw") && !eraserSelected && defaultSelected){
-        event.target.style.backgroundColor = penColor;
-    } else if(event.target.classList.contains("draw") && eraserSelected){
-        event.target.style.backgroundColor = "white";
-    } else if(event.target.classList.contains("draw") && rainbowSelected){
-        event.target.style.backgroundColor = rainbowColors[Math.floor(Math.random() * 7)]
-    }
+            event.target.style.backgroundColor = penColor;
+        } else if(event.target.classList.contains("draw") && eraserSelected){
+            event.target.style.backgroundColor = "white";
+        } else if(event.target.classList.contains("draw") && rainbowSelected){
+            const randomR = Math.floor(Math.random() * 256)
+            const randomG = Math.floor(Math.random() * 256)
+            const randomB = Math.floor(Math.random() * 256)
+            event.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+        }
 });
 
 document.addEventListener("mouseup", () => mousedown = false);
 
-document.addEventListener("mousemove", (event) => {
+
+function changeColor(event){
     if(mousedown){
         if(event.target.classList.contains("draw") && !eraserSelected && defaultSelected){
             event.target.style.backgroundColor = penColor;
         } else if(event.target.classList.contains("draw") && eraserSelected){
             event.target.style.backgroundColor = "white";
         } else if(event.target.classList.contains("draw") && rainbowSelected){
-            event.target.style.backgroundColor = rainbowColors[Math.floor(Math.random() * 7)]
+            const randomR = Math.floor(Math.random() * 256)
+            const randomG = Math.floor(Math.random() * 256)
+            const randomB = Math.floor(Math.random() * 256)
+            event.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
         }
     }
-});
+}
 
 document.addEventListener("click", (event) => {
     if(event.target.classList.contains("eraser")){
@@ -137,5 +145,3 @@ clearButton.addEventListener("click", () => {
     clearGrid();
     createGrid(boxCount);
 });
-
-
